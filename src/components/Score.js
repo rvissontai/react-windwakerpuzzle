@@ -32,61 +32,39 @@ class Score extends React.Component {
     }
 
     movePiece(keyCode) {
-        var pieces = Array.prototype.slice.call( document.getElementById('board').children ),
-            blankPiece = document.getElementsByClassName("blank")[0];
+        if(keyCode == 39){
+            this.movePieceTo(1);
+        }
+        else if(keyCode == 37){
+            this.movePieceTo(-1);
+        }
+        else if(keyCode == 40){
+            this.movePieceTo(4);
+        }
+        else if(keyCode == 38){
+            this.movePieceTo(-4);
+        }
+    } 
+
+    movePieceTo(index){
+        var pieces = Array.prototype.slice.call( document.getElementById('board').children );
+        var blankPiece = document.getElementsByClassName("blank")[0];
 
         var indexBlankPiece = pieces.indexOf( blankPiece );
         var blankPiece = pieces[indexBlankPiece];
         var htmlBlank = blankPiece.innerHTML;
         var classBlankPiece = blankPiece.className;
 
-        if(keyCode == 39){
-            var indexPieceToBeReplaced = indexBlankPiece+1;
-            var htmlPiece = pieces[indexPieceToBeReplaced].innerHTML;
-            var classPiece = pieces[indexPieceToBeReplaced].className;
+        var indexPieceToBeReplaced = indexBlankPiece + index;
+        var htmlPiece = pieces[indexPieceToBeReplaced].innerHTML;
+        var classPiece = pieces[indexPieceToBeReplaced].className;
 
-            document.getElementById(indexPieceToBeReplaced).innerHTML = htmlBlank;
-            document.getElementById(indexPieceToBeReplaced).className = classBlankPiece;
+        document.getElementById(indexPieceToBeReplaced).innerHTML = htmlBlank;
+        document.getElementById(indexPieceToBeReplaced).className = classBlankPiece;
 
-            blankPiece.innerHTML = htmlPiece;
-            blankPiece.className = classPiece;
-        }
-        else if(keyCode == 37){
-            var indexPieceToBeReplaced = indexBlankPiece-1;
-            var htmlPiece = pieces[indexPieceToBeReplaced].innerHTML;
-            var classPiece = pieces[indexPieceToBeReplaced].className;
-
-            document.getElementById(indexPieceToBeReplaced).innerHTML = htmlBlank;
-            document.getElementById(indexPieceToBeReplaced).className = classBlankPiece;
-
-            blankPiece.innerHTML = htmlPiece;
-            blankPiece.className = classPiece;
-        }
-        else if(keyCode == 40){
-            var indexPieceToBeReplaced = indexBlankPiece+4;
-            var htmlPiece = pieces[indexPieceToBeReplaced].innerHTML;
-            var classPiece = pieces[indexPieceToBeReplaced].className;
-
-            document.getElementById(indexPieceToBeReplaced).innerHTML = htmlBlank;
-            document.getElementById(indexPieceToBeReplaced).className = classBlankPiece;
-
-            blankPiece.innerHTML = htmlPiece;
-            blankPiece.className = classPiece;
-
-            
-        }
-        else if(keyCode == 38){
-            var indexPieceToBeReplaced = indexBlankPiece-4;
-            var htmlPiece = pieces[indexPieceToBeReplaced].innerHTML;
-            var classPiece = pieces[indexPieceToBeReplaced].className;
-
-            document.getElementById(indexPieceToBeReplaced).innerHTML = htmlBlank;
-            document.getElementById(indexPieceToBeReplaced).className = classBlankPiece;
-
-            blankPiece.innerHTML = htmlPiece;
-            blankPiece.className = classPiece;
-        }
-    } 
+        blankPiece.innerHTML = htmlPiece;
+        blankPiece.className = classPiece;
+    }
 
     render() {
         return (
