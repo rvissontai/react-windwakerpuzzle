@@ -1,0 +1,22 @@
+#board {
+    height: 100%;
+    border: 5px solid brown;
+    padding: 0;
+}
+
+#board > .col-3 {
+    display: inline-block;
+    color: white;
+    background-color: black;
+    padding:0;
+    border: 1px solid lightgray;
+    height: 25%;
+}
+
+.img-piece {
+    max-width: 100%;
+    max-height: 100%;
+
+    min-width: 100%;
+    min-height: 100%;
+}
