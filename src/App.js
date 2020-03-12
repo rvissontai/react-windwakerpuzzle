@@ -11,20 +11,11 @@ class App extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      keyUp: this.handleKeyUp,
-      lastKeyCodePressed: 0
-    }
-
     document.body.onkeydown = this.handleKeyUp.bind(this);
   }
 
   handleKeyUp(event) {
-    this.setState({
-      lastKeyPressed: event.keyCode
-    });
-
-    this.score.increaseMoviments(event.keyCode); 
+    this.score.movePiece(event.keyCode); 
   }
 
   render() {

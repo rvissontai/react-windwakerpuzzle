@@ -11,20 +11,6 @@ class Score extends React.Component {
         }
     }
 
-    increaseMoviments(keyCode) {
-        if(keyCode < 37 || keyCode > 40){
-            return;
-        }
-
-        console.log(keyCode);
-
-        this.setState({
-            moviments: this.state.moviments + 1
-        });
-
-        this.movePiece(keyCode);
-    }
-
     calculateScore() {
         this.setState({
             score: this.state.score + 10
@@ -32,6 +18,10 @@ class Score extends React.Component {
     }
 
     movePiece(keyCode) {
+        if(keyCode < 37 || keyCode > 40){
+            return;
+        }
+
         if(keyCode == 39){
             this.movePieceTo(1);
         }
@@ -51,11 +41,17 @@ class Score extends React.Component {
         var blankPiece = document.getElementsByClassName("blank")[0];
 
         var indexBlankPiece = pieces.indexOf( blankPiece );
+        var indexPieceToBeReplaced = indexBlankPiece + index;
+
+        if(indexPieceToBeReplaced > 15 || indexPieceToBeReplaced < 0){
+            return 
+        }
+
         var blankPiece = pieces[indexBlankPiece];
         var htmlBlank = blankPiece.innerHTML;
         var classBlankPiece = blankPiece.className;
 
-        var indexPieceToBeReplaced = indexBlankPiece + index;
+        
         var htmlPiece = pieces[indexPieceToBeReplaced].innerHTML;
         var classPiece = pieces[indexPieceToBeReplaced].className;
 
@@ -64,6 +60,14 @@ class Score extends React.Component {
 
         blankPiece.innerHTML = htmlPiece;
         blankPiece.className = classPiece;
+
+        this.increaseMoviments();        
+    }
+
+    increaseMoviments() {
+        this.setState({
+            moviments: this.state.moviments + 1
+        });
     }
 
     render() {
