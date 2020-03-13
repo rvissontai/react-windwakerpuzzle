@@ -1,14 +1,28 @@
 import React from 'react';
 import './Score.css';
 
+const piecesPerLine = 4;
+const keyCodeLeft = 37;
+const keyCodeUp = 38;
+const keyCodeRight = 39;
+const keyCodeDown = 40;
+const cornersRigth = [3,7,11,15];
+const cornersLeft = [0,4,8,12];
+
 class Score extends React.Component {
     constructor(props) {
         super(props);
+
+        this.calculateCornerPieces();
 
         this.state = {
             score: 0,
             moviments: 0
         }
+    }
+
+    calculateCornerPieces() {
+        //TODO - Dynamically the cornes based on rows and lines
     }
 
     calculateScore() {
@@ -22,16 +36,20 @@ class Score extends React.Component {
             return;
         }
 
-        if(keyCode == 39){
+        this.setState({
+            lastestPressedKeyCode: keyCode
+        });
+
+        if(keyCode == keyCodeRight){
             this.movePieceTo(1);
         }
-        else if(keyCode == 37){
+        else if(keyCode == keyCodeLeft){
             this.movePieceTo(-1);
         }
-        else if(keyCode == 40){
+        else if(keyCode == keyCodeDown){
             this.movePieceTo(4);
         }
-        else if(keyCode == 38){
+        else if(keyCode == keyCodeUp){
             this.movePieceTo(-4);
         }
     } 
@@ -47,11 +65,18 @@ class Score extends React.Component {
             return 
         }
 
+        if(this.state.lastestPressedKeyCode == keyCodeLeft && cornersLeft.indexOf(indexBlankPiece) > -1) {
+            return;
+        }
+
+        if(this.state.lastestPressedKeyCode == keyCodeRight && cornersRigth.indexOf(indexBlankPiece) > -1) {
+            return;
+        }
+
         var blankPiece = pieces[indexBlankPiece];
         var htmlBlank = blankPiece.innerHTML;
         var classBlankPiece = blankPiece.className;
 
-        
         var htmlPiece = pieces[indexPieceToBeReplaced].innerHTML;
         var classPiece = pieces[indexPieceToBeReplaced].className;
 
