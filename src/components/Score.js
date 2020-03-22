@@ -93,6 +93,26 @@ class Score extends React.Component {
         this.setState({
             moviments: this.state.moviments + 1
         });
+
+        this.checkForWin();
+    }
+
+    checkForWin() {
+        var allPieces = document.querySelectorAll(".piece");
+        var wins = true;
+        
+        for(let i = 0; i < allPieces.length; i++) {
+            var pieceId = allPieces[i].id;
+            var img = allPieces[i].getElementsByTagName('img')[0];
+            var imgId = img.dataset.piece;
+
+            if(pieceId != imgId) {
+                wins = false;
+                break;
+            }
+        }
+
+        alert("CONGRATULATOIONS! You win!");
     }
 
     render() {

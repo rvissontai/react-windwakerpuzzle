@@ -17,6 +17,7 @@ class Board extends React.Component {
         for(let i=1; i<=16;i++) {
             arrayAllPieces.push({
                 src: require("../assets/img/gamepieces/" + folderWithParts + "/image_part_" + i + ".jpg"),
+                number: (i-1),
                 className: "piece"
             });
         }
@@ -27,6 +28,7 @@ class Board extends React.Component {
 
         shuffledArray.push({ 
             src: require('../assets/img/piece.png'),
+            number: 15,
             className: "blank"
         });
 

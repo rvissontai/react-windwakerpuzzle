@@ -7,7 +7,7 @@ class Piece extends React.Component {
 
         return (
             <div id={ this.props.id } className={className}>
-                <img className="img-piece" src={ model.src }/>
+                <img data-piece={ model.number } className="img-piece" src={ model.src }/>
             </div>
         );
     }
